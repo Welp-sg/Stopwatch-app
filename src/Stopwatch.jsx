@@ -1,42 +1,58 @@
-import React, {useState,useEffect,useRef} from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
-function Stopwatch(){
-const [isRunning, setIsRunning] = useState(false);
-const [elapsedTime, setElapsedTime] = useState(0);
-const intervalRef = useRef(null);
+function Stopwatch() {
+  const [isRunning, setIsRunning] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const startTimeRef = useRef(0);
 
-useEffect(() => {
-  if (isRunning) {
-    intervalRef.current = setInterval(() => {
-      setElapsedTime((prev) => prev + 100);
-    }, 100);
-  } else {
-    clearInterval(intervalRef.current);
-  }
-  return () => clearInterval(intervalRef.current);
-}, [isRunning]);
+  useEffect(() => {
+    if (isRunning) {
+      startTimeRef.current = Date.now() - elapsedTime;
+      const interval = setInterval(() => {
+        setElapsedTime(Date.now() - startTimeRef.current);
+      }, 100);
+      return () => clearInterval(interval);
+    }
+  }, [isRunning, elapsedTime]);
 
-const formatTime = (time) => {
-  const minutes = Math.floor(time / 60000);
-  const seconds = Math.floor((time % 60000) / 1000);
-  const milliseconds = Math.floor((time % 1000) / 10);
-  return `${minutes}:${seconds.toString().padStart(2, '0')}:${milliseconds.toString().padStart(2, '0')}`;
-};
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const milliseconds = Math.floor((time % 1000) / 10);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}:${milliseconds
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
-return (
-  <div>
-    <h1>Stopwatch</h1>
-    <p>{formatTime(elapsedTime)}</p>
-    <button onClick={() => setIsRunning((prev) => !prev)}>
-      {isRunning ? 'Pause' : 'Start'}
-    </button>
-    <button onClick={() => {
-      setIsRunning(false);
-      setElapsedTime(0);
-    }}>
-      Reset
-    </button>
-  </div>
-);
+  return (
+    <div className="stopwatch-container">
+      <h1 className="stopwatch-title">Stopwatch</h1>
+      <p className="stopwatch-time">{formatTime(elapsedTime)}</p>
+      <div className="stopwatch-buttons">
+        <button
+          className="btn btn-start"
+          onClick={() => setIsRunning((prev) => !prev)}
+        >
+          {isRunning ? "Pause" : "Start"}
+        </button>
+        <button
+          className="btn btn-stop"
+          onClick={() => setIsRunning(false)}
+        >
+          Stop
+        </button>
+        <button
+          className="btn btn-reset"
+          onClick={() => {
+            setIsRunning(false);
+            setElapsedTime(0);
+          }}
+        >
+          Reset
+        </button>
+      </div>
+    </div>
+  );
 }
-export default Stopwatch
+
+export default Stopwatch;

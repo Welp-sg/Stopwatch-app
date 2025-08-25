@@ -1,68 +1,79 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Stopwatch.css */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
+.stopwatch-container {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #121212; /* dark background */
+  font-family: "Poppins", sans-serif;
+  color: #e0e0e0;
+  text-align: center;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.stopwatch-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #f5f5f5;
+  letter-spacing: 0.5px;
 }
 
-button {
+.stopwatch-time {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 12px;
+  background: #1e1e1e;
+  box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.05), 
+              0 4px 20px rgba(0, 0, 0, 0.6);
+  color: #f0f0f0;
+  letter-spacing: 2px;
+}
+
+.stopwatch-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.6rem 1.3rem;
+  border: none;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 0.25s ease;
+  color: #f5f5f5;
+  background: #2a2a2a;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.6);
+}
+
+.btn-start {
+  background: #2e7d32; /* dark green */
+}
+.btn-start:hover {
+  background: #388e3c;
+}
+
+.btn-stop {
+  background: #fbc02d; /* muted amber */
+  color: #111;
+}
+.btn-stop:hover {
+  background: #f9a825;
+}
+
+.btn-reset {
+  background: #c62828; /* dark red */
+}
+.btn-reset:hover {
+  background: #b71c1c;
 }
